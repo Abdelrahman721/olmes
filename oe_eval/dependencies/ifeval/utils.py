@@ -1,9 +1,13 @@
 import dataclasses
 from typing import Dict, Optional, Union
 
-from lm_eval.utils import eval_logger
+from lm_eval import utils
 
 from oe_eval.dependencies.ifeval import instructions_registry
+
+import logging
+# Backward-compatible eval_logger for lm_eval main branch (removed utils.eval_logger)
+eval_logger = getattr(utils, "eval_logger", None) or logging.getLogger("lm-eval")
 
 
 @dataclasses.dataclass
