@@ -1,6 +1,5 @@
 import copy
 import logging
-import os
 from collections import defaultdict
 from typing import DefaultDict, List, Optional, Tuple, cast
 
@@ -73,8 +72,9 @@ class VLLM_Verbose(VLLM):
         if torch.cuda.device_count() > 1:
             kwargs["tensor_parallel_size"] = torch.cuda.device_count()
 
-        if torch.cuda.device_count() == 1:
-            os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+        # Respect externally provided CUDA_VISIBLE_DEVICES.
+        # The split runner sets this per process to pin each eval job to a specific physical GPU.
+        # Overriding it here can silently remap jobs back to GPU 0.
 
         # if "revision" in kwargs and kwargs["revision"] is None:
         # Hack to deal with Eleuther using "main" as a default for "revision", not needed for VLLM
