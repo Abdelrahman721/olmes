@@ -44,8 +44,9 @@ def generate(history: list[dict]) -> str:
             **inputs,
             max_new_tokens=1024,
             do_sample=True,
-            temperature=0.7,
-            top_p=0.9,
+            temperature=0.6,
+            top_p=0.95,
+            top_k=20,
         )
     new_tokens = output_ids[0][inputs["input_ids"].shape[1]:]
     return tokenizer.decode(new_tokens, skip_special_tokens=True)
