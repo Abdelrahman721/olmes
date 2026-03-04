@@ -21,7 +21,7 @@ SETUP_TAG="8gpu"
 RUN_ID="${RUN_ID:-$(date +%Y%m%d_%H%M%S)}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-workspace/splits}"
 
-MODEL_PATH="${MODEL_PATH:-./final}"
+MODEL_PATH="${MODEL_PATH:-./model}"
 BATCH_SIZE="${BATCH_SIZE:-96}"
 DEFAULT_MODEL_ARGS='{"trust_remote_code":"true", "max_length":4096}'
 MODEL_ARGS="${MODEL_ARGS:-$DEFAULT_MODEL_ARGS}"
